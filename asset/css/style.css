@@ -22,3 +22,26 @@ nav, a{
 .sub_Q{
   text-align: left;
 }
+.barnv{
+
+
+top: 0px ;
+margin: 0;
+padding: 0;
+width: 25%;
+background-color: #f1f1f1;
+height: 100%; /* Full height */
+position: fixed; /* Make it stick, even on scroll */
+overflow: auto; /* Enable scrolling if the sidenav has too much content */
+left:0%   ;
+border: 20px solid  #34A5DA;
+
+
+}
+
+div.tx {
+    position: absolute;
+  
+    right: 500px;
+    left:100px
+}
