@@ -167,7 +167,7 @@
     <p class="construction">γpays,COUNT(∗)(πpays(Produits⋈Pays))</p>
     <!------------------SQL------------------>
     <h4>CODE SQL:</h4>
-    <pre><code>
+    <pre class="SQL"><code>
     SELECT Pays, COUNT(*) AS OffreProduit
     FROM Fournisseur AS f INNER JOIN Produit AS p ON p.NoFour = f.NoFour
     GROUP BY Pays ORDER BY COUNT(*) DESC;
