@@ -1,0 +1,25 @@
+img{
+    display: block;
+    margin: 0 auto;
+    width: auto;
+}
+
+.SQL {
+    display: flex;
+    flex: auto;
+    white-space:pre-wrap;
+    justify-content: left;
+    width:auto;
+    color: darkgray;
+    background:black;
+    font-size: large;
+}
+
+.construction{
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    color: royalblue;
+    font-family: "Lucida Handwriting",sans-serif;
+}

@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="asset/css/style.css">
+    <link rel="stylesheet" type="text/css" href="asset/css/M3.css">
+
     <Title>SAE Base de données</Title>
 </head>
 
@@ -25,103 +27,45 @@
     analyser plus rapidement et crée des indicateurs pour simplifier les données.
 </p>
 
-
-<h2>Questions:</h2>
-<!--------------------------QUESTION 1------------------------------->
-<article class="sub_Q">
-<h3 class="question"> 1 </h3>
-    <ul>
-    <li>
-        <!--Chiffre d'affaire-->
-        Le premier indicateur choisi est le chiffre d'affaire des dessert et boisson séparer:Cette indicateur est le
-        plus utile car nous pouvons estimer les produits qui génére le plus (%) du chiffre d'affaire total.
-
-    </li>
-</ul>
+<h2>Thémes:</h2>
+<article class="question">
+    <h3> DESSERT ET BOISSON </h3>
+    <p>
+        On veut le chiffre d’affaire généré par catégorie desserts ou catégorie boisson.
+    </p>
+    <ul class="sub_Q">
+        <li>
+            <!--Chiffre d'affaire-->
+            Le premier indicateur choisi est le chiffre d'affaire des dessert et boisson séparer:Cette indicateur est le
+            plus utile car nous pouvons estimer les produits qui génére le plus (%) du chiffre d'affaire total.
+        </li>
+    </ul>
+    <p class="construction">πCategorie(σ"Dessert" OR "Boisson")⨝Produit⨝DetailCommande
+        γNomCategorie
+    </p>
     <!-----------------SQL------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
     SELECT SUM(dc.PrixUnitCli * dc.QteCom ) AS chiffre_affaires, NomCateg
     FROM DetailCommande AS dc INNER JOIN (Produit AS p INNER JOIN Categorie AS c ON c.CodeCateg = p.CodeCateg) ON p.RefProd = dc.RefProd
     WHERE c.CodeCateg In (1,3)
     GROUP BY NomCateg;
-    </pre>
-<img src="asset/img/1.c.png" alt="Dessert=207326,76 euro et boisson=360305,75 euro">
-
-<!------------------------------------>
-<ul>
-<li>
-    <!--Pays de provenance-->
-    Le pays de provenance des produits permet d'identifier les fournisseurs qui propose le plus de produit
-</li>
-</ul>
-<!----------------SQL-------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
-    SELECT DISTINCT Pays, NomCateg
-    FROM Fournisseur LEFT JOIN (Produit LEFT JOIN Categorie ON Categorie.CodeCateg=Produit.CodeCateg) ON Fournisseur.NoFour=Produit.NoFour
-    WHERE NomCateg LIKE "Boissons" OR NomCateg LIKE "Desserts";
-    </pre>
-<img src="asset/img/1.a.png" alt="Pays de Provenance:ALLEMAGNE,FRANCE,ROYAUME-UNI">
-
-</article>
-<!--------------------------QUESTION 2------------------------->
-<article class="sub_Q">
-<h3 class="question"> 2 </h3>
-
-<ul>
-    <li>
-        Cette indicateur permet de connaître qu'elle type de produit ne vende pas pour enlever sans que ça touche la
-        compagnie ou le fournisseur
-    </li>
-</ul>
+    </code></pre>
+    <img src="asset/img/1.c.png" alt="Dessert=207326,76 euro et boisson=360305,75 euro">
+    <!--------------------------------------------------------->
+    <p>Quels fournisseurs vendent uniquement des boissons ou des desserts ?</p>
+    <ul class="sub_Q">
+        <li>
+            <!--Fournisseur vendent que dessert ou boisson-->
+            Celui là affiche seulement les fournisseur qui vend dessert ou boisson car en connaissant on peut analyser
+            si en
+            offrant seulement ces types de produit on ne perd pas de chiffre d'affaire.
+        </li>
+    </ul>
+    <p class="construction">σ¬ (σcategorie=′Desserts′∧categorie=′Boissons′(Fournisseurs⋈Produits))</p>
     <!-----------------SQL------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
-    SELECT COUNT(*) AS Prod_non_commandé, NomCateg
-    FROM Categorie AS c INNER JOIN Produit AS p ON p.CodeCateg = c.CodeCateg
-    WHERE NOT EXISTS (
-        SELECT dc.RefProd
-        FROM DetailCommande AS dc
-        WHERE dc.RefProd = p.RefProd )
-    GROUP BY NomCateg;
-    </pre>
-<img src="asset/img/2.b.png"
-     alt="27 Boisson,3 Dessert, 2 Condiments,2 Pâtes et Céréales et 2 Poisson et fruits de Mer">
-<!------------------------------------>
-<ul>
-<li>
-    Celle-ci permet de connaître les pays qui offre le plus de produits car en connaissant nous pouvons estimer le
-    nombre totale de commande.
-</li>
-</ul>
-<!------------------SQL------------------>
-<h1>CODE SQL:</h1>
-<pre>
-    SELECT Pays, COUNT(*) AS OffreProduit
-    FROM Fournisseur AS f INNER JOIN Produit AS p ON p.NoFour = f.NoFour
-    GROUP BY Pays ORDER BY COUNT(*) DESC;
-    </pre>
-<img src="asset/img/2.c.png" alt="Nombre totale de Produit Par Pays"><br>
-Nous avons en prenant compte des notations différents des pays que le Royaume-Unis qui est premier avec 22, les
-Etats-Unis avec 13, l’Allemagne avec 11 et puis juste derrière l'Australie avec 10
-
-</article>
-<!---------------------------QUESTION 3----------------------------->
-<article class="sub_Q">
-<h3 class="question"> 3 </h3>
-
-<ul>
-    <li>
-        <!--Fournisseur vendent que dessert ou boisson-->
-        Celui là affiche seulement les fournisseur qui vend dessert ou boisson car en connaissant on peut analyser
-        si en
-        offrant seulement ces types de produit on ne perd pas de chiffre d'affaire.
-    </li>
-</ul>
-<!-----------------SQL------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
     SELECT Societe
     FROM Fournisseur
     WHERE NoFour NOT IN ( SELECT NoFour FROM Produit WHERE CodeCateg NOT IN (1,3) )
@@ -129,18 +73,22 @@ Etats-Unis avec 13, l’Allemagne avec 11 et puis juste derrière l'Australie av
         SELECT NoFour
         FROM Produit
         WHERE CodeCateg IN (1,3) ); );
-    </pre>
-<img src="asset/img/3.b.png" alt="11 Fournisseur qui vend dessert ou boisson seulement">
-<ul>
-    <li>
-        <!--Vende les deux-->
-        En prenant compte de celui-d'en haut on peut deviner si leurs revenue est plus grand comparer a vendre seulement
-        un type.
-    </li>
-</ul>
-<!-----------------SQL------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
+        </code></pre>
+    <img src="asset/img/3.b.png" alt="11 Fournisseur qui vend dessert ou boisson seulement">
+    <!--------------------------------------------------------->
+    <p>Y en a-t-il qui vendent les deux boissons et desserts ?</p>
+    <ul class="sub_Q">
+        <li>
+            <!--Vende les deux-->
+            En prenant compte de celui-d'en haut on peut deviner si leurs revenue est plus grand comparer a vendre
+            seulement
+            un type.
+        </li>
+    </ul>
+    <p class="construction">σ¬ (σcategorie=′Desserts′∧categorie=′Boissons′(Fournisseurs⋈Produits))</p>
+    <!-----------------SQL------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
     SELECT DISTINCT Fournisseur.Societe
     FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour
     WHERE (((Fournisseur.NoFour) In (
@@ -150,54 +98,155 @@ Etats-Unis avec 13, l’Allemagne avec 11 et puis juste derrière l'Australie av
             SELECT NoFour
             FROM Produit
             WHERE CodeCateg LIKE 3 )));
-    </pre>
-<img src="asset/img/3.c.png" alt="4 Fournisseur qui Vend les deux">
+    </code></pre>
+    <img src="asset/img/3.c.png" alt="4 Fournisseur qui Vend les deux">
+
+
 </article>
-
-<!--------------------QUESTION 4--------------------------->
-<article class="sub_Q">
-<h3 class="question"> 4 </h3>
-
-<ul>
-    <li>
-        <!--Commande groupé Nante-->
-        Nous regroupons les clients commandent de l'allemagne venant de Nante car en connaissant le nombre de client
-        par ville on peut focaliser
-        plus dessus.
-    </li>
-</ul>
-<!-----------------SQL------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
-    SELECT c.CodeCli, c.SocieteCli
-    FROM Client AS c
-    WHERE c.VilleCli LIKE "Nantes" AND c.CodeCli IN (
-        SELECT cd.CodeCli
-        FROM Commande AS cd, Produit AS p, Fournisseur AS f
-        WHERE c.CodeCli = cd.CodeCli AND f.NoFour = p.NoFour AND pays LIKE "Allemagne" )
-    </pre>
-<img src="asset/img/4.a.png" alt="3 Client Nantaire">
-<!------------------------------------>
-<ul>
-    <li>
-        <!--Produit qui  n'ont jamais eu de remise 25%-->
-        Celle-ci permet de voir les produits qui ont jamais eu une remise 25%, cette indicateur est pertinent car en
-        analysant le type de produit le founisseur poura soit ajouter soit enlever pour avoir plus de commande ou sinon
-        les tendances des clients.
-    </li>
-</ul>
-<!----------------SQL-------------------->
-<h1>CODE SQL:</h1>
-<pre class="SQL">
+<!--------------------------------------------------->
+<article class="question">
+    <h3> L'Offre KDou </h3>
+    <p>Donner des informations sur les fournisseurs qui proposent des produits qui ne sont pas commandés actuellement
+        ?</p>
+    <ul class="sub_Q">
+        <li>
+            Cette indicateur permet de connaître qu'elle type de produit ne vende pas pour enlever sans que ça touche la
+            compagnie ou le fournisseur
+        </li>
+    </ul>
+    <p class="construction">πFournisseur⨝Produit⟕¬DetailCommande(σReference Produit)</p>
+    <!-----------------SQL------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
+    SELECT COUNT(*) AS Prod_non_commandé, NomCateg
+    FROM Categorie AS c INNER JOIN Produit AS p ON p.CodeCateg = c.CodeCateg
+    WHERE NOT EXISTS (
+        SELECT dc.RefProd
+        FROM DetailCommande AS dc
+        WHERE dc.RefProd = p.RefProd )
+    GROUP BY NomCateg;
+    </code></pre>
+    <img src="asset/img/2.b.png"
+         alt="27 Boisson,3 Dessert, 2 Condiments,2 Pâtes et Céréales et 2 Poisson et fruits de Mer">
+    <!------------------------------------>
+    <p>Quels produits n’ont eu que des remises de 10% ou 20% ou pas de remise ?</p>
+    <ul class="sub_Q">
+        <li>
+            <!--Produit qui  n'ont jamais eu de remise 25%-->
+            Celle-ci permet de voir les produits qui ont jamais eu une remise 25%, cet indicateur est pertinent car en
+            analysant le type de produit le founisseur poura soit ajouter, soit enlever pour avoir plus de commande ou
+            sinon
+            les tendances des clients.
+        </li>
+    </ul>
+    <p class="construction">Produit∖(πProduit(σremise=25(Commandes)))</p>
+    <!----------------SQL-------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
     SELECT DISTINCT P.RefProd
     FROM Produit AS P LEFT JOIN DetailCommande AS DC ON P.RefProd = DC.RefProd
     WHERE P.RefProd NOT IN (
         SELECT DISTINCT P2.RefProd
         FROM Produit P2 LEFT JOIN DetailCommande AS DC2 ON P2.RefProd = DC2.RefProd
         WHERE DC2.Remise=0.25 );
-    </pre>
-<img src="asset/img/4.c.png" alt="Produit qui n'ont jamais eu de remise 25%"><br>
-Nous avons au total 43 produit
+    </code> </pre>
+    <img src="asset/img/4.d.png" alt="Produit qui n'ont jamais eu de remise 25%"><br>
+    Nous avons au total 43 produit
+</article>
+<!---------------------------QUESTION 3----------------------------->
+<article class="question">
+    <h3> Provenance des Produits </h3>
+    <p>Quels sont les pays qui ont une offre importante de produit ?</p>
+    <ul class="sub_Q">
+        <li>
+            Celle-ci permet de connaître les pays qui offre le plus de produits car en connaissant nous pouvons estimer
+            le
+            nombre totale de commande.
+        </li>
+    </ul>
+    <p class="construction">γpays,COUNT(∗)(πpays(Produits⋈Pays))</p>
+    <!------------------SQL------------------>
+    <h4>CODE SQL:</h4>
+    <pre><code>
+    SELECT Pays, COUNT(*) AS OffreProduit
+    FROM Fournisseur AS f INNER JOIN Produit AS p ON p.NoFour = f.NoFour
+    GROUP BY Pays ORDER BY COUNT(*) DESC;
+    </code></pre>
+    <img src="asset/img/2.c.png" alt="Nombre totale de Produit Par Pays"><br>
+    Nous avons en prenant compte des notations différents des pays que le Royaume-Unis qui est premier avec 22, les
+    Etats-Unis avec 13, l’Allemagne avec 11 et puis juste derrière l'Australie avec 10
+
+    <p>Quels sont les pays de provenance de ces catégories ?</p>
+    <ul class="sub_Q">
+
+        <li>
+            <!--Pays de provenance-->
+            Le pays de provenance des produits permet d'identifier les fournisseurs qui propose le plus de produit
+        </li>
+    </ul>
+    <p class="construction"> πFournisseur⨝(Produit(σPrixUnit≥50)⨝Categorie)</p>
+    <!----------------SQL-------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
+    SELECT DISTINCT Pays, NomCateg
+    FROM Fournisseur LEFT JOIN (Produit LEFT JOIN Categorie ON Categorie.CodeCateg=Produit.CodeCateg) ON Fournisseur.NoFour=Produit.NoFour
+    WHERE NomCateg LIKE "Boissons" OR NomCateg LIKE "Desserts";
+    </code></pre>
+    <img src="asset/img/1.a.png" alt="Pays de Provenance:ALLEMAGNE,FRANCE,ROYAUME-UNI">
+
+</article>
+
+<!----------------------------------------------->
+<article class="question">
+    <h3> La clientèle </h3>
+    <p>Certains clients n’ont jamais eu la remise la plus importante de 25%. Qui sont-ils ?</p>
+    <ul class="sub_Q">
+
+        <li>
+            Nous regroupons les clients qui n'ont jamais eu de remise de 25% pour savoir comment les fideliser mieux.
+            Nous pouvons aussi les regrouper par pays pour avoir une meilleure idée de la demande.
+        </li>
+    </ul>
+    <p  class="construction">Clients∖(πclient(σremise=25(Commandes)))</p>
+    <!-----------------SQL------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
+    SELECT DISTINCT CL.SocieteCli
+    FROM Client AS CL LEFT JOIN (Commande AS C LEFT JOIN DetailCommande AS DC ON C.NoCom = DC.NoCom) ON CL.CodeCli = C.CodeCli
+    WHERE CL.CodeCli NOT IN (
+        SELECT DISTINCT CL2.CodeCli
+        FROM Client CL2 LEFT JOIN (Commande C2 LEFT JOIN DetailCommande DC2 ON C2.NoCom = DC2.NoCom) ON CL2.CodeCli = C2.CodeCli
+        WHERE DC2.Remise = 0.25);
+    </code></pre>
+    <img src="asset/img/4.c.png" alt="3 Client Nantaire">
+
+    <p>
+        Un client nantais Le verre à soi souhaite savoir quels autres clients nantais
+        commandent aussi des produits en Allemagne pour envisager de futures livraisons
+        groupées.
+    </p>
+    <ul class="sub_Q">
+
+        <li>
+            <!--Commande groupé Nante-->
+            Nous regroupons les clients commandent de l'allemagne venant de Nante car en connaissant le nombre de client
+            par ville on peut focaliser
+            plus dessus.
+        </li>
+    </ul>
+    <p class="construction">πclient(σville=′Nantes′∧pays=′Allemagne′(Commandes⋈Clients⋈Pays))</p>
+    <!-----------------SQL------------------->
+    <h4>CODE SQL:</h4>
+    <pre class="SQL"><code>
+    SELECT c.CodeCli, c.SocieteCli
+    FROM Client AS c
+    WHERE c.VilleCli LIKE "Nantes" AND c.CodeCli IN (
+        SELECT cd.CodeCli
+        FROM Commande AS cd, Produit AS p, Fournisseur AS f
+        WHERE c.CodeCli = cd.CodeCli AND f.NoFour = p.NoFour AND pays LIKE "Allemagne" )
+    </code></pre>
+    <img src="asset/img/4.a.png" alt="3 Client Nantaire">
+
 </article>
 
 
@@ -209,13 +258,13 @@ L’objectif de la requête est d’optimiser l’offre en trouvant le pays des 
 et en même temps, la catégorie qui apporte le plus de bénéfice.
 Elle est intéréssante car en connaissant cela, investir plus en eux serait le meilleur à faire pour optimiser les gains.
 
-<pre class="SQL">
+<pre class="SQL"><code>
 SELECT SUM(dc.PrixUnitCli * dc.QteCom) AS chiffre_affaires, NomCateg, Pays
 FROM DetailCommande AS dc INNER JOIN (Produit AS p INNER JOIN Categorie AS c ON c.CodeCateg = p.CodeCateg) ON p.RefProd = dc.RefProd, Fournisseur AS f
 WHERE f.NoFour = p.NoFour
 GROUP BY NomCateg, Pays
 ORDER BY SUM(dc.PrixUnitCli * dc.QteCom ) DESC;
-</pre>
+</code></pre>
 <img src="asset/img/Nguyen.png" alt=""><br>
 Classement :
 <ol>
@@ -231,32 +280,30 @@ Classement :
 Calcul du chiffre d'affaires grâce à la somme du prix par unité acheté par les clients multiplié par sa quantité acheté.
 J’ai relié toutes les tables dont j’avais besoin entre elles et j’ai regroupé le résultat par catégorie et pays en les
 triant du plus grand au plus petit car ce sont les grandes sommes qui nous intéressent.
-<!-------------------------------------------------------------------------------------------------------------------------------------->
-<!-------------------------------------------------------------------------------------------------------------------------------------->
+
 <h3>Lyna:</h3>
 Objectif : Trouver le nombre de client par ville ayant déjà eu une remise de 25%
 Cela peut permettre à Kdou de trouver la ville la plus profitable s'il souhaite s'installer avec une entreprise
 physique.
-<pre class="SQL">
+<pre class="SQL"><code>
 SELECT Cli.VilleCli,COUNT(Cli.CodeCli) AS NbrClientAvecRemise
 FROM Client AS Cli, Commande AS Com, DetailCommande AS DetCom
 WHERE Cli.CodeCli = Com.CodeCli AND Com.NoCom = DetCom.NoCom AND DetCom.Remise = 0.25
 GROUP BY Cli.VilleCli;
-</pre>
+</code></pre>
 <img src="asset/img/Lyna.png" alt="Liste des ville par nombre de client avec 25% de remise"><br>
-<!-------------------------------------------------------------------------------------------------------------------------------------->
-<!-------------------------------------------------------------------------------------------------------------------------------------->
+
 <h3>Satyam:</h3>
 Cette requête est pertinent pour la compagnie KDou. Puisqu’elle mesure la quantité et la fréquence des achats du
 clients.<br>
 Voici le code SQL: En prenant le societe avec les nombre de produit commander nous pouvons personaliser leurs services
 et les fidéliser avec un programme de loyauté.
-<pre class="SQL">
+<pre class="SQL"><code>
 SELECT CL.SocieteCli,COUNT(DC.RefProd) AS Com_Freq
 FROM Client CL,Commande C,DetailCommande DC, Produit P
 WHERE C.CodeCli=CL.CodeCli AND DC.NoCom=C.NoCom AND DC.RefProd=P.RefProd
 GROUP BY CL.SocieteCli  ;
-</pre>
+    </code></pre>
 <img src="asset/img/Satyam.png" alt="Liste des fournisseur qui achete le plus"><br>
 
 
