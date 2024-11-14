@@ -36,9 +36,9 @@ Le thème de la mission (ce que nous étudions par cette analyse) est l'étude d
                   <li>Des tartines</li>
                   <li>Du beurre</li>
                   <li><pre> 
-                    SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays 
-                    FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour 
-                    WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne")); 
+SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays 
+FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour 
+WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne")); 
                     </pre></li>
                   </ul>
             </li>
@@ -46,21 +46,35 @@ Le thème de la mission (ce que nous étudions par cette analyse) est l'étude d
                 <ul>
                   <li>Des tartines</li>
                   <li>Du beurre</li>
-                  <li>Des couverts</li>
+                  <li><pre>
+SELECT Categorie.NomCateg, Fournisseur.Pays 
+FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour 
+WHERE (((Fournisseur.Pays)="Singapour")); 
+</pre>
+                  </li>
                   </ul>
             </li>
             <li>Combien y a-t-il de clients nantais 
                 <ul>
                   <li>Des tartines</li>
                   <li>Du beurre</li>
-                  <li>Des couverts</li>
+                  <li><pre>
+SELECT Client.CodeCli, Client.VilleCli 
+FROM Client 
+WHERE (((Client.VilleCli)="Nantes"));
+
+                  </pre></li>
                   </ul>
             </li>
             <li>Donnez l’offre de produits suédois
                 <ul>
                   <li>Des tartines</li>
                   <li>Du beurre</li>
-                  <li>Des couverts</li>
+                  <li><pre>
+SELECT Produit.NomProd, Fournisseur.Pays 
+FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour 
+WHERE (((Fournisseur.Pays)="Suède" Or (Fournisseur.Pays)="Suéde")); 
+                  </pre></li>
                   </ul>
             </li>
           </ul> 
