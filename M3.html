@@ -14,21 +14,25 @@
 <header>MISSION 3</header>
 
 <nav>
+    <label for="bascule">☰</label>
+    <input type="checkbox" id="bascule">
+    <div class="menu">
     <a href="index.html">A Propos</a>
     <a href="M1.html">Mission 1</a>
     <a href="M2.html">Mission 2</a>
     <a href="M3.html">Mission 3</a>
     <a href="M4.html">Mission 4</a>
+    </div>
 </nav>
 
 <h1>Objective du Mission</h1>
 <p>
-    Nous de analyser la base de donnée fournit par KDou,nous avons crée depuis Microsoft Access des requêtes SQL pour
+    Nous devons analyser la base de donnée fournit par KDou, nous avons créé depuis Microsoft Access des requêtes SQL pour
     analyser plus rapidement et crée des indicateurs pour simplifier les données.
 </p>
 
 <h2>Thémes:</h2>
-<article class="question">
+<article id="Q1">
     <h3> DESSERT ET BOISSON </h3>
     <p>
         On veut le chiffre d’affaire généré par catégorie desserts ou catégorie boisson.
@@ -37,7 +41,7 @@
         <li>
             <!--Chiffre d'affaire-->
             Le premier indicateur choisi est le chiffre d'affaire des dessert et boisson séparer:Cette indicateur est le
-            plus utile car nous pouvons estimer les produits qui génére le plus (%) du chiffre d'affaire total.
+            plus utile car nous pouvons estimer les produits qui génère le plus (%) du chiffre d'affaire total.
         </li>
     </ul>
     <p class="construction">πCategorie(σ"Dessert" OR "Boisson")⨝Produit⨝DetailCommande
@@ -52,6 +56,7 @@
     GROUP BY NomCateg;
     </code></pre>
     <img src="asset/img/1.c.png" alt="Dessert=207326,76 euro et boisson=360305,75 euro">
+    <br>
     <!--------------------------------------------------------->
     <p>Quels fournisseurs vendent uniquement des boissons ou des desserts ?</p>
     <ul class="sub_Q">
@@ -75,6 +80,7 @@
         WHERE CodeCateg IN (1,3) ); );
         </code></pre>
     <img src="asset/img/3.b.png" alt="11 Fournisseur qui vend dessert ou boisson seulement">
+    <br>
     <!--------------------------------------------------------->
     <p>Y en a-t-il qui vendent les deux boissons et desserts ?</p>
     <ul class="sub_Q">
@@ -104,7 +110,7 @@
 
 </article>
 <!--------------------------------------------------->
-<article class="question">
+<article id="Q2">
     <h3> L'Offre KDou </h3>
     <p>Donner des informations sur les fournisseurs qui proposent des produits qui ne sont pas commandés actuellement
         ?</p>
@@ -115,6 +121,7 @@
         </li>
     </ul>
     <p class="construction">πFournisseur⨝Produit⟕¬DetailCommande(σReference Produit)</p>
+    <br>
     <!-----------------SQL------------------->
     <h4>CODE SQL:</h4>
     <pre class="SQL"><code>
@@ -128,6 +135,7 @@
     </code></pre>
     <img src="asset/img/2.b.png"
          alt="27 Boisson,3 Dessert, 2 Condiments,2 Pâtes et Céréales et 2 Poisson et fruits de Mer">
+    <br>
     <!------------------------------------>
     <p>Quels produits n’ont eu que des remises de 10% ou 20% ou pas de remise ?</p>
     <ul class="sub_Q">
@@ -154,7 +162,7 @@
     Nous avons au total 43 produit
 </article>
 <!---------------------------QUESTION 3----------------------------->
-<article class="question">
+<article id="Q3">
     <h3> Provenance des Produits </h3>
     <p>Quels sont les pays qui ont une offre importante de produit ?</p>
     <ul class="sub_Q">
@@ -167,7 +175,7 @@
     <p class="construction">γpays,COUNT(∗)(πpays(Produits⋈Pays))</p>
     <!------------------SQL------------------>
     <h4>CODE SQL:</h4>
-    <pre><code>
+    <pre class="SQL"><code>
     SELECT Pays, COUNT(*) AS OffreProduit
     FROM Fournisseur AS f INNER JOIN Produit AS p ON p.NoFour = f.NoFour
     GROUP BY Pays ORDER BY COUNT(*) DESC;
@@ -176,6 +184,7 @@
     Nous avons en prenant compte des notations différents des pays que le Royaume-Unis qui est premier avec 22, les
     Etats-Unis avec 13, l’Allemagne avec 11 et puis juste derrière l'Australie avec 10
 
+    <br>
     <p>Quels sont les pays de provenance de ces catégories ?</p>
     <ul class="sub_Q">
 
@@ -197,7 +206,7 @@
 </article>
 
 <!----------------------------------------------->
-<article class="question">
+<article id="Q4">
     <h3> La clientèle </h3>
     <p>Certains clients n’ont jamais eu la remise la plus importante de 25%. Qui sont-ils ?</p>
     <ul class="sub_Q">
@@ -219,7 +228,7 @@
         WHERE DC2.Remise = 0.25);
     </code></pre>
     <img src="asset/img/4.c.png" alt="3 Client Nantaire">
-
+    <br>
     <p>
         Un client nantais Le verre à soi souhaite savoir quels autres clients nantais
         commandent aussi des produits en Allemagne pour envisager de futures livraisons
@@ -251,6 +260,7 @@
 
 
 <h2>NOS INDICATEURS PERSONELLES</h2>
+<article class="Perso">
 <p>
 
 <h3>Nguyen:</h3>
@@ -284,7 +294,7 @@ triant du plus grand au plus petit car ce sont les grandes sommes qui nous inté
 <h3>Lyna:</h3>
 Objectif : Trouver le nombre de client par ville ayant déjà eu une remise de 25%
 Cela peut permettre à Kdou de trouver la ville la plus profitable s'il souhaite s'installer avec une entreprise
-physique.
+physique.<br>
 <pre class="SQL"><code>
 SELECT Cli.VilleCli,COUNT(Cli.CodeCli) AS NbrClientAvecRemise
 FROM Client AS Cli, Commande AS Com, DetailCommande AS DetCom
@@ -297,7 +307,7 @@ GROUP BY Cli.VilleCli;
 Cette requête est pertinent pour la compagnie KDou. Puisqu’elle mesure la quantité et la fréquence des achats du
 clients.<br>
 Voici le code SQL: En prenant le societe avec les nombre de produit commander nous pouvons personaliser leurs services
-et les fidéliser avec un programme de loyauté.
+et les fidéliser avec un programme de loyauté.<br>
 <pre class="SQL"><code>
 SELECT CL.SocieteCli,COUNT(DC.RefProd) AS Com_Freq
 FROM Client CL,Commande C,DetailCommande DC, Produit P
@@ -306,6 +316,7 @@ GROUP BY CL.SocieteCli  ;
     </code></pre>
 <img src="asset/img/Satyam.png" alt="Liste des fournisseur qui achete le plus"><br>
 
+</article>
 
 <footer>
     Fait par:

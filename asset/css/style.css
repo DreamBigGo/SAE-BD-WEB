@@ -1,47 +1,68 @@
-html{
-  font-family: Verdana;
+
+body{
+    font-family: Arial, sans-serif;
+    background-color: black;
+  color: white;
 }
 
 header{
   font-size:45px;
   text-align: center;
+  background-color: darkred;
 }
 
-nav, a{
-  background-color:darkgray;
-  justify-content: center;
+nav{
+  background-color: navy;
+  border-radius: 10px;
+  padding: 10px;
+}
+label,input{
+  display: none;
+}
+.menu{
   display: flex;
-  border: blue solid 1px;
-  font-size: large;
+  border-radius: 10px;
+  align-items: center;
+}
+/*Stylisation avant le survole*/
+.menu a{
+  display: flex;
+  width:20%;
+
+  border:0 solid black;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  margin:5px;
+}
+.menu a:hover{
+  background-color: #888888;
 }
 
-.question{
-  text-align: left;
-}
+@media all and (max-width: 720px) {
+  nav{
+    width: auto;
+    height: 55px;/*Agit sur la taille du button*/
+  }
+  .menu {
+    display: none;
+  }
+  .menu a{
+    width: 100%;
+  }
+  label{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 40px;
+  }
+  #bascule:checked + .menu{
+    display: flex;
+    flex-direction: column;
+    background-color: navy;
+    height: auto;
+  }
 
-.sub_Q{
-  text-align: left;
-}
-.barnv{
-
-
-top: 0px ;
-margin: 0;
-padding: 0;
-width: 25%;
-background-color: #f1f1f1;
-height: 100%; /* Full height */
-position: fixed; /* Make it stick, even on scroll */
-overflow: auto; /* Enable scrolling if the sidenav has too much content */
-left:0%   ;
-border: 20px solid  #34A5DA;
-
-
-}
-
-div.tx {
-    position: absolute;
-  
-    right: 500px;
-    left:100px
 }
