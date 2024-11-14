@@ -35,10 +35,11 @@ Le thème de la mission (ce que nous étudions par cette analyse) est l'étude d
                 <ul>
                   <li>Des tartines</li>
                   <li>Du beurre</li>
-                  <li><code>• SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays 
+                  <li><pre> 
+                    SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays 
                     FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour 
                     WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne")); 
-                    </code></li>
+                    </pre></li>
                   </ul>
             </li>
             <li>Quelles sont les catégories de produit vendues par les four-nisseurs Singapouriens ?
