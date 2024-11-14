@@ -24,13 +24,53 @@ Le thème de la mission (ce que nous étudions par cette analyse) est l'étude d
 </article>
 
   <h2>indicateurs intéressants </h2>
-    
-    <ul>
-      <li>Coffee</li>
-      <li>Tea</li>
-      <li>Milk</li>
-    </ul> 
-    
+  <article>
+    <h2>Le context</h2>
+    <p>Le but de cette mission est de découvrir la base de données kdou et de se familiariser avec elle pour savoir ce qui est important et ce qui ne l'est pas en utilisant le logiciel low code Access
+  Le thème de la mission (ce que nous étudions par cette analyse) est l'étude de marché du marché mondial en général et de quelques échantillons spéci-fiques (acheteurs). Nous voulons savoir quels produits sont populaires ? dans quels endroits ? quels produits sont chers ? et quels produits ne le sont pas ? quels pays offrent le plus de produits ? quels pays ont le plus de clients ?
+  </p>
+  </article>
+  
+    <h2>indicateurs intéressants </h2>
+  
+    <h3>les produits allemgne et d’Italie </h3>
+      <ol>
+          <ul>
+            <li>Quels sont les produits d’Italie ou d’Allemagne vendus 50€ ou moins ? (On veut les connaître noms et prix, nom du fournisseur, ville et pays d’origine.)
+                <ul>
+                  <li>Des tartines</li>
+                  <li>Du beurre</li>
+                  <li><code>• SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays 
+                    FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour 
+                    WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne")); 
+                    </code></li>
+                  </ul>
+            </li>
+            <li>Quelles sont les catégories de produit vendues par les four-nisseurs Singapouriens ?
+                <ul>
+                  <li>Des tartines</li>
+                  <li>Du beurre</li>
+                  <li>Des couverts</li>
+                  </ul>
+            </li>
+            <li>Combien y a-t-il de clients nantais 
+                <ul>
+                  <li>Des tartines</li>
+                  <li>Du beurre</li>
+                  <li>Des couverts</li>
+                  </ul>
+            </li>
+            <li>Donnez l’offre de produits suédois
+                <ul>
+                  <li>Des tartines</li>
+                  <li>Du beurre</li>
+                  <li>Des couverts</li>
+                  </ul>
+            </li>
+          </ul> 
+      </ol>
+  
+  
 <footer>
     Fait par:
     <ul>
