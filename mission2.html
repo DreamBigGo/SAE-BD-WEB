@@ -22,6 +22,155 @@
     </nav>
 
 
+    <article>
+        <h2>Le context</h2>
+        <p>Le but de cette mission est de découvrir la base de données kdou et de se familiariser avec elle pour savoir ce qui est important et ce qui ne l'est pas en utilisant le logiciel low code Access
+            Le thème de la mission (ce que nous étudions par cette analyse) est l'étude de marché du marché mondial en général et de quelques échantillons spécifiques (acheteurs). Nous voulons savoir quels produits sont populaires ? dans quels endroits ? quels produits sont chers ? et quels produits ne le sont pas ? quels pays offrent le plus de produits ? quels pays ont le plus de clients ?
+        </p>
+    </article>
+
+
+
+
+    <h2>indicateurs intéressants </h2>
+
+
+    <ol>
+        <ul>
+            <li>Quels sont les produits d’Italie ou d’Allemagne vendus 50€ ou moins ? (On veut les connaître noms et prix, nom du fournisseur, ville et pays d’origine.)
+                <ul>
+                    <li><img src="asset/img/M2/P1,1.jpg" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P1,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays
+FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
+WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne"));
+                    </pre></li>
+                </ul>
+            </li>
+
+            <li>Quelles sont les catégories de produit vendues par les four-nisseurs Singapouriens ?
+                <ul>
+                    <li><img src="asset/img/M2/P2,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P2,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Categorie.NomCateg, Fournisseur.Pays
+FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour
+WHERE (((Fournisseur.Pays)="Singapour"));
+</pre>
+                    </li>
+                </ul>
+            </li>
+            <li>Combien y a-t-il de clients nantais
+                <ul>
+                    <li><img src="asset/img/M2/P3,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P3,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Client.CodeCli, Client.VilleCli
+FROM Client
+WHERE (((Client.VilleCli)="Nantes"));
+
+                  </pre></li>
+                </ul>
+            </li>
+            <li>Donnez l’offre de produits suédois
+                <ul>
+                    <li><img src="asset/img/M2/P4,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P4,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Produit.NomProd, Fournisseur.Pays
+FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
+WHERE (((Fournisseur.Pays)="Suède" Or (Fournisseur.Pays)="Suéde"));
+                  </pre></li>
+                </ul>
+            </li>
+            <li>Donner le prix moyen de vente des produits, le prix minimum et le prix maximum.
+                <ul>
+                    <li><img src="asset/img/M2/P5,1.jpg" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P5,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Max(Produit.PrixUnit) AS MaxDePrixUnit, Min(Produit.PrixUnit) AS MinDePrixUnit, Avg(Produit.PrixUnit) AS MoyenneDePrixUnit
+FROM Produit;
+
+                    </pre></li>
+                </ul>
+            </li>
+            <li>Quelle est la fonction de contact fournisseur la plus représentée ?
+                <ul>
+                    <li><img src="asset/img/M2/P6,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P6,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Fournisseur.Fonction, Count(Fournisseur.Fonction) AS CompteDeFonction
+FROM Fournisseur
+GROUP BY Fournisseur.Fonction
+ORDER BY Count(Fournisseur.Fonction) DESC;
+
+                    </pre></li>
+                </ul>
+            </li>
+            <li>Quels sont les produits conditionnés dans du carton ou dans du verre ?
+                <ul>
+                    <li><img src="asset/img/M2/P7,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P7,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Produit.NomProd, Produit.QteParUnite
+FROM Produit
+GROUP BY Produit.NomProd, Produit.QteParUnite
+HAVING (((Produit.QteParUnite) Like "*verre*" Or (Produit.QteParUnite) Like "*carton*"));
+
+                    </pre></li>
+                </ul>
+            </li>
+            <li>Donner pour chaque fournisseur le nombre de produits qu'il propose en bouteille
+                <ul>
+                    <li><img src="asset/img/M2/P8,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P8,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Fournisseur.Societe, Count(Produit.QteParUnite) AS QteEnBouteille
+FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
+WHERE (((Produit.QteParUnite) Like "*bouteille*"))
+GROUP BY Fournisseur.Societe;
+
+                    </pre></li>
+                </ul>
+            </li>
+            <li>On veut le chiffre d’affaire total généré avec les informations dont on dispose.
+                <ul>
+                    <li><img src="asset/img/M2/P9,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P9,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Sum(PrixUnitCli*QteCom) AS Chiffredaffaire
+FROM DetailCommande;
+
+                    </pre></li>
+                </ul>
+            </li>
+            <li>Est-ce qu’il y a dans la clientèle des clients qui n’ont pas encore passé de commande ?
+                <ul>
+                    <li><img src="asset/img/M2/P11,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P11,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT Client.CodeCli
+FROM Client LEFT JOIN Commande ON Client.CodeCli = Commande.CodeCli
+GROUP BY Client.CodeCli, Commande.CodeCli
+HAVING (((Commande.CodeCli) Is Null));
+                    </pre></li>
+                </ul>
+            </li>
+            <li>Dans quelles villes la clientèle est-elle la plus importante ? Citer les 3 premières.
+                <ul>
+                    <li><img src="asset/img/M2/P10,1.png" alt="le résultat"></li>
+                    <li><img src="asset/img/M2/P10,2.png" alt="les requête"></li>
+                    <li><pre class="SQL">
+SELECT TOP 3 Client.VilleCli, Count(Client.CodeCli) AS CompteDeCodeCli
+FROM Client
+GROUP BY Client.VilleCli
+ORDER BY Count(Client.CodeCli) DESC;
+                    </pre></li>
+                </ul>
+            </li>
+        </ul>
+    </ol>
 
 
 
