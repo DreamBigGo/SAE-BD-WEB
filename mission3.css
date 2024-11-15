@@ -7,28 +7,112 @@ h2{
     margin: 45px 60px 0 60px;
     padding: 15px 340px;
     background-color: #db177ca2;
+    align-items: center;
+    text-align: center;
 }
 p{
+    display:flex;
     margin: 20px 60px 0 60px;
     padding: 15px 70px;
 }
 
 li{
+    display:flex;
     margin: 10px 60px 0 150px;
 }
 
 
 .SQL{
     margin: 20px 60px 0 60px;
+    display: inline-flex;
+    flex-direction: row;
+    white-space: pre-wrap;
+    justify-content: left;
+    width:auto;
+    border-radius: 0.2rem;
+    font-size: 150%;
+    position: relative;
+}
+.construction{
+    display: flex;
+    flex: auto;
+    justify-content: center;
+    align-items: center;
+    color: royalblue;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
 }
 
 img{
     margin: 10px 60px 0 145px;
+    position: relative;
 }
+
 div.boxRadius {
     margin: 75px 75px 75px 75px;
     border-radius: 15px; /* Bordures arrondies de 15px */
     border: 2px solid #db177ca2; /* Optionnel : bordure visible */
     background-color: #f9f9f9; /* Optionnel : couleur de fond douce */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour un effet de relief */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour un effet de relief */
+}
+
+@media all and (max-width: 720px){
+    h1{
+        margin: 0 ;
+        padding: 0;
+
+    }
+
+    h2{
+        margin:0;
+        padding:0;
+        background-color: #db177ca2;
+        align-items: center;
+    }
+    p{
+
+        margin: 0;
+        padding: 0;
+    }
+
+    li{
+        margin:0;
+    }
+
+
+    .SQL{
+        margin:0;
+        display: inline-flex;
+        flex-direction: column;
+        white-space: pre-wrap;
+        justify-content: left;
+        width:auto;
+        border-radius: 0.2rem;
+        font-size: large;
+    }
+    .construction{
+        margin: auto;
+        align-items: center;
+        color: royalblue;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        font-weight: bold;
+        font-size: 53%;
+    }
+
+    img{
+        margin: 0;
+        width: 100%;
+    }
+
+    div.boxRadius {
+        border-radius: 15px; /* Bordures arrondies de 15px */
+        border: 2px solid #db177ca2; /* Optionnel : bordure visible */
+        background-color: #f9f9f9; /* Optionnel : couleur de fond douce */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour un effet de relief */
+    }
+
+    .title>h2>p{
+        display: flex;
+        text-align: left;
+    }
 }
