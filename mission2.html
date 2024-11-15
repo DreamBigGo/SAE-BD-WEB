@@ -1,189 +1,134 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Accueil Kdou</title>
-    <link rel="stylesheet" type="text/css" href="Style.css" >
-    <link rel="stylesheet" type="text/css" href="mission2.css" >
-    <link rel="icon" type="image/png" href="asset/img/logo.png" />
-</head>
-<body>
-    <nav>
-        <label for="bascule">☰</label>
-        <input type="checkbox" id="bascule">
-        <div class="menu">
-            <a class="box1" href="Accueil.html">Accueil</a>
-            <a href="mission1.html">Mission 1</a>
-            <a href="mission2.html">Mission 2</a>
-            <a href="mission3.html">Mission 3</a>
-            <a class="box5" href="conclusion.html">Conclusion</a>
-        </div>
-    </nav>
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Accueil Kdou</title>
+        <link rel="stylesheet" type="text/css" href="asset/css/M2.css">
+        <link rel="icon" type="image/png" href="asset/img/logo.png" />
+    </head>
+    <body>
+        <nav>
+            <label for="bascule">☰</label>
+            <input type="checkbox" id="bascule">
+            <!--<ul class="menu">
+                <li><a class="box1" href="accueil.html">Accueil</a></li>
+                <li><a href="mission1.html">Mission 1</a></li>
+                <li><a href="mission2.html">Mission 2</a></li>
+                <li><a href="mission3.html">Mission 3</a></li>
+                <li><a class="box5" href="conclusion.html">Conclusion</a></li>
+            </ul>-->
+            <div class="menu">
+                <a class="box1" href="accueil.html">Accueil</a>
+                <a href="mission1.html">Mission 1</a>
+                <a href="mission2.html">Mission 2</a>
+                <a href="mission3.html">Mission 3</a>
+                <a class="box5" href="conclusion.html">Conclusion</a>
+            </div>
+        </nav>
 
-    <section class="bannière">
-        <div class="image_bannière">
-            <img src="asset/img/imgstyle/magasin4.png" alt="Image de la bannière">
-        </div>
-        <h1>Kdou</h1>
-        <p>--- Projet : Eco-friendly ---</p>
-    </section>
+        <section class="bannière">
+            <div class="image_bannière">
+                <img src="asset/img/magasin4.png" alt="Image de la bannière">
+            </div>
+            <h1>Kdou</h1>
+            <p>--- Projet : Eco-friendly ---</p>
+        </section>
 
-    <article>
-        <h2>Le context</h2>
-        <p>Le but de cette mission est de découvrir la base de données kdou et de se familiariser avec elle pour savoir ce qui est important et ce qui ne l'est pas en utilisant le logiciel low code Access
-            Le thème de la mission (ce que nous étudions par cette analyse) est l'étude de marché du marché mondial en général et de quelques échantillons spécifiques (acheteurs). Nous voulons savoir quels produits sont populaires ? dans quels endroits ? quels produits sont chers ? et quels produits ne le sont pas ? quels pays offrent le plus de produits ? quels pays ont le plus de clients ?
-        </p>
-    </article>
+        <main>
+            <section>
+                <article class="presentation2">
+                    <h2> Contexte </h2>
+                    <p>
+                        Kdou est une entreprise qui a été <strong>créé en 2018</strong>. <br><br>
+                        Son but est de faire découvrir le monde aux restaurants et épiceries françaises. <br>
+                        Spécialisée dans l'importation et l'exportation de produits d'épicerie haut de gamme,
+                        elle relie le marché français aux meilleurs produits du monde entier.
+                        Leur sélection diversifiée comprend du tofu authentique du Japon, du sirop d'érable riche du Canada,
+                        de délicieux biscuits d'Angleterre, des pâtes fraîches d'Italie et bien plus encore.<br><br>
+                        Pour cette deuxième mission, nous avons utiliser le langage QBE pour l'exploitation de la base de donnée de Kdou
+                        et nous avons pu également nous initier avec le langage SQL pour établir des requêtes dans la problématique de l'entreprise.
+                    </p>
+                </article>
 
+                <article>
+                    <hr class="ligne">
+                    <h1>Bilan général de la mission 2</h1>
+                    <hr class="ligne">
+                </article>
 
+                <article class="indicateurs">
+                    <h2>Indicateurs pertinents</h2>
+                    <ul>
+                        <div class="box-requete">
+                            <p>On cherche les fournisseurs des produits d'Italie ou d'Allemagne vendus 50€ ou moins.<br>
+                                Pour cette requête, avoir les fournisseurs peut être intéressant pour penser à des collaboration proche
+                                de la France et ainsi consommer moins de CO<sub>2</sub>. De plus, il permet de rendre les produits plus abordable
+                                en choisissant les moins coûteux.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/qbe1.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Produit.NomProd, Produit.PrixUnit, Fournisseur.Contact, Fournisseur.Ville, Fournisseur.Pays <br>
+                                    <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
+                                    <strong>WHERE</strong> (((Produit.PrixUnit)<50) <strong>AND</strong> ((Fournisseur.Pays)="Italie" <strong>OR</strong> (Fournisseur.Pays)="Allemagne")); </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/resultat1.png">
+                        </div>
 
+                        <div class="box-requete">
+                            <p>On cherche les produits conditionnés dans du carton et dans du verre. On pourrait considérer que les bouteilles sont en verre et que les boîtes
+                                sont en plastique, mais par précaution, nous choisissons seulement où le conditionnement est bien explicite. En plus d'être recyclable, on pourrait
+                                utiliser ces données afin de mieux répartir dans les livraisons, les produits commandés qui seront dans le même conditionnement.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/qbe2.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Produit.NomProd, Produit.QteParUnite <br>
+                                    <strong>FROM</strong> Produit
+                                    <strong>GROUP BY</strong> Produit.NomProd, Produit.QteParUnite <br>
+                                    <strong>HAVING</strong>(((Produit.QteParUnite) <strong>LIKE</strong> "*verre*" <strong>OR</strong> (Produit.QteParUnite) <strong>LIKE</strong> "*carton*"));
+                                </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/resultat2.png">
+                        </div>
 
-    <h2>indicateurs intéressants </h2>
-
-
-    <ol>
-        <ul>
-            <li>Quels sont les produits d’Italie ou d’Allemagne vendus 50€ ou moins ? (On veut les connaître noms et prix, nom du fournisseur, ville et pays d’origine.)
-                <ul>
-                    <li><img src="asset/img/M2/P1,1.jpg" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P1,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Produit.NomProd, Produit.PrixUnit, Four-nisseur.Contact, Fournisseur.Ville, Fournisseur.Pays
-FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
-WHERE (((Produit.PrixUnit)<50) AND ((Fournis-seur.Pays)="Italie" Or (Fournisseur.Pays)="Allemagne"));
-                    </pre></li>
-                </ul>
-            </li>
-
-            <li>Quelles sont les catégories de produit vendues par les four-nisseurs Singapouriens ?
-                <ul>
-                    <li><img src="asset/img/M2/P2,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P2,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Categorie.NomCateg, Fournisseur.Pays
-FROM Fournisseur INNER JOIN (Categorie INNER JOIN Produit ON Categorie.CodeCateg = Produit.CodeCateg) ON Fournisseur.NoFour = Produit.NoFour
-WHERE (((Fournisseur.Pays)="Singapour"));
-</pre>
-                    </li>
-                </ul>
-            </li>
-            <li>Combien y a-t-il de clients nantais
-                <ul>
-                    <li><img src="asset/img/M2/P3,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P3,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Client.CodeCli, Client.VilleCli
-FROM Client
-WHERE (((Client.VilleCli)="Nantes"));
-
-                  </pre></li>
-                </ul>
-            </li>
-            <li>Donnez l’offre de produits suédois
-                <ul>
-                    <li><img src="asset/img/M2/P4,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P4,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Produit.NomProd, Fournisseur.Pays
-FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
-WHERE (((Fournisseur.Pays)="Suède" Or (Fournisseur.Pays)="Suéde"));
-                  </pre></li>
-                </ul>
-            </li>
-            <li>Donner le prix moyen de vente des produits, le prix minimum et le prix maximum.
-                <ul>
-                    <li><img src="asset/img/M2/P5,1.jpg" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P5,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Max(Produit.PrixUnit) AS MaxDePrixUnit, Min(Produit.PrixUnit) AS MinDePrixUnit, Avg(Produit.PrixUnit) AS MoyenneDePrixUnit
-FROM Produit;
-
-                    </pre></li>
-                </ul>
-            </li>
-            <li>Quelle est la fonction de contact fournisseur la plus représentée ?
-                <ul>
-                    <li><img src="asset/img/M2/P6,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P6,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Fournisseur.Fonction, Count(Fournisseur.Fonction) AS CompteDeFonction
-FROM Fournisseur
-GROUP BY Fournisseur.Fonction
-ORDER BY Count(Fournisseur.Fonction) DESC;
-
-                    </pre></li>
-                </ul>
-            </li>
-            <li>Quels sont les produits conditionnés dans du carton ou dans du verre ?
-                <ul>
-                    <li><img src="asset/img/M2/P7,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P7,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Produit.NomProd, Produit.QteParUnite
-FROM Produit
-GROUP BY Produit.NomProd, Produit.QteParUnite
-HAVING (((Produit.QteParUnite) Like "*verre*" Or (Produit.QteParUnite) Like "*carton*"));
-
-                    </pre></li>
-                </ul>
-            </li>
-            <li>Donner pour chaque fournisseur le nombre de produits qu'il propose en bouteille
-                <ul>
-                    <li><img src="asset/img/M2/P8,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P8,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Fournisseur.Societe, Count(Produit.QteParUnite) AS QteEnBouteille
-FROM Fournisseur INNER JOIN Produit ON Fournisseur.NoFour = Produit.NoFour
-WHERE (((Produit.QteParUnite) Like "*bouteille*"))
-GROUP BY Fournisseur.Societe;
-
-                    </pre></li>
-                </ul>
-            </li>
-            <li>On veut le chiffre d’affaire total généré avec les informations dont on dispose.
-                <ul>
-                    <li><img src="asset/img/M2/P9,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P9,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Sum(PrixUnitCli*QteCom) AS Chiffredaffaire
-FROM DetailCommande;
-
-                    </pre></li>
-                </ul>
-            </li>
-            <li>Est-ce qu’il y a dans la clientèle des clients qui n’ont pas encore passé de commande ?
-                <ul>
-                    <li><img src="asset/img/M2/P11,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P11,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT Client.CodeCli
-FROM Client LEFT JOIN Commande ON Client.CodeCli = Commande.CodeCli
-GROUP BY Client.CodeCli, Commande.CodeCli
-HAVING (((Commande.CodeCli) Is Null));
-                    </pre></li>
-                </ul>
-            </li>
-            <li>Dans quelles villes la clientèle est-elle la plus importante ? Citer les 3 premières.
-                <ul>
-                    <li><img src="asset/img/M2/P10,1.png" alt="le résultat"></li>
-                    <li><img src="asset/img/M2/P10,2.png" alt="les requête"></li>
-                    <li><pre class="SQL">
-SELECT TOP 3 Client.VilleCli, Count(Client.CodeCli) AS CompteDeCodeCli
-FROM Client
-GROUP BY Client.VilleCli
-ORDER BY Count(Client.CodeCli) DESC;
-                    </pre></li>
-                </ul>
-            </li>
-        </ul>
-    </ol>
-
-
-
-
-</body>
-<footer>
-  <p>&copy; Saé S1-04 CONCEPTION – INTERROGATION D’UNE BASE DE DONNEES</p>
-</footer>
+                        <div class="box-requete"><p>On cherche le nombre de produits en bouteille proposés par chaque fournisseur. Dans le cas où elles sont recyclables, cela permet de mieux mesurer
+                            les quantitées en comparaison avec d'autres fournisseurs afin de maximiser les produits d'un seul fournisseur.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/qbe3.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Fournisseur.Societe, <strong>COUNT</strong>(Produit.QteParUnite) <strong>AS</strong> QteEnBouteille <br>
+                                    <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
+                                    <strong>WHERE</strong> (((Produit.QteParUnite) <strong>LIKE</strong> "*bouteille*"))
+                                    <strong>GROUP BY</strong> Fournisseur.Societe; </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/resultat3.png">
+                        </div>
+                        <div class="box-requete"><p>On cherche les villes où la clientèle est la plus importante. Si Kdou cherche à se projeter pour une entreprise physique, cela permet de maximiser
+                            les profits et de diriger les produits en un seul endroit.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/qbe4.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT TOP</strong> 3 Client.VilleCli, <strong>COUNT</strong>(Client.CodeCli) <strong>AS</strong> CompteDeCodeCli <br>
+                                    <strong>FROM</strong> Client <br>
+                                    <strong>GROUP BY</strong> Client.VilleCli <br>
+                                    <strong>ORDER BY COUNT</strong>(Client.CodeCli) <strong>DESC</strong>; </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/resultat4.png">
+                        </div>
+                    </ul>
+                </article>
+            </section>
+        </main>
+    </body>
+    <footer>
+      <p>&copy; Saé S1-04 CONCEPTION – INTERROGATION D’UNE BASE DE DONNEES</p>
+    </footer>
 </html>
