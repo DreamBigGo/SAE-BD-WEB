@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Accueil Kdou</title>
-        <link rel="stylesheet" type="text/css" href="asset/css/M2.css">
-        <link rel="icon" type="image/png" href="asset/img/logo.png" />
+        <link rel="stylesheet" type="text/css" href="mission2.css">
+        <link rel="icon" type="image/png" href="asset/img/M2/logo.png" />
     </head>
     <body>
         <nav>
@@ -29,7 +29,7 @@
 
         <section class="bannière">
             <div class="image_bannière">
-                <img src="asset/img/magasin4.png" alt="Image de la bannière">
+                <img src="asset/img/imgstyle/magasin4.png" alt="Image de la bannière">
             </div>
             <h1>Kdou</h1>
             <p>--- Projet : Eco-friendly ---</p>
@@ -67,14 +67,14 @@
                                 en choisissant les moins coûteux.</p>
                             <h4>QBE et SQL généré</h4>
                             <ul>
-                                <li><h5>En langage QBE : <img src="asset/img/qbe1.png"></h5></li>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe1.png"></h5></li>
                                 <li><h5>En langage SQL : </h5>
                                     <strong>SELECT</strong> Produit.NomProd, Produit.PrixUnit, Fournisseur.Contact, Fournisseur.Ville, Fournisseur.Pays <br>
                                     <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
                                     <strong>WHERE</strong> (((Produit.PrixUnit)<50) <strong>AND</strong> ((Fournisseur.Pays)="Italie" <strong>OR</strong> (Fournisseur.Pays)="Allemagne")); </li>
                             </ul>
                             <h4>Resultat</h4>
-                            <img src="asset/img/resultat1.png">
+                            <img src="asset/img/M2/resultat1.png">
                         </div>
 
                         <div class="box-requete">
@@ -83,7 +83,7 @@
                                 utiliser ces données afin de mieux répartir dans les livraisons, les produits commandés qui seront dans le même conditionnement.</p>
                             <h4>QBE et SQL généré</h4>
                             <ul>
-                                <li><h5>En langage QBE : <img src="asset/img/qbe2.png"></h5></li>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe2.png"></h5></li>
                                 <li><h5>En langage SQL : </h5>
                                     <strong>SELECT</strong> Produit.NomProd, Produit.QteParUnite <br>
                                     <strong>FROM</strong> Produit
@@ -92,14 +92,14 @@
                                 </li>
                             </ul>
                             <h4>Resultat</h4>
-                            <img src="asset/img/resultat2.png">
+                            <img src="asset/img/M2/resultat2.png">
                         </div>
 
                         <div class="box-requete"><p>On cherche le nombre de produits en bouteille proposés par chaque fournisseur. Dans le cas où elles sont recyclables, cela permet de mieux mesurer
                             les quantitées en comparaison avec d'autres fournisseurs afin de maximiser les produits d'un seul fournisseur.</p>
                             <h4>QBE et SQL généré</h4>
                             <ul>
-                                <li><h5>En langage QBE : <img src="asset/img/qbe3.png"></h5></li>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe3.png"></h5></li>
                                 <li><h5>En langage SQL : </h5>
                                     <strong>SELECT</strong> Fournisseur.Societe, <strong>COUNT</strong>(Produit.QteParUnite) <strong>AS</strong> QteEnBouteille <br>
                                     <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
@@ -107,13 +107,13 @@
                                     <strong>GROUP BY</strong> Fournisseur.Societe; </li>
                             </ul>
                             <h4>Resultat</h4>
-                            <img src="asset/img/resultat3.png">
+                            <img src="asset/img/M2/resultat3.png">
                         </div>
                         <div class="box-requete"><p>On cherche les villes où la clientèle est la plus importante. Si Kdou cherche à se projeter pour une entreprise physique, cela permet de maximiser
                             les profits et de diriger les produits en un seul endroit.</p>
                             <h4>QBE et SQL généré</h4>
                             <ul>
-                                <li><h5>En langage QBE : <img src="asset/img/qbe4.png"></h5></li>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe4.png"></h5></li>
                                 <li><h5>En langage SQL : </h5>
                                     <strong>SELECT TOP</strong> 3 Client.VilleCli, <strong>COUNT</strong>(Client.CodeCli) <strong>AS</strong> CompteDeCodeCli <br>
                                     <strong>FROM</strong> Client <br>
@@ -121,7 +121,7 @@
                                     <strong>ORDER BY COUNT</strong>(Client.CodeCli) <strong>DESC</strong>; </li>
                             </ul>
                             <h4>Resultat</h4>
-                            <img src="asset/img/resultat4.png">
+                            <img src="asset/img/M2/resultat4.png">
                         </div>
                     </ul>
                 </article>
