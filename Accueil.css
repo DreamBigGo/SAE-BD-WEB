@@ -14,6 +14,13 @@ label, #bascule {
     display: none; /* on veut pas afficher le trigramme */
 }
 
+nav {
+    top: 0;
+    position: sticky;
+    z-index: 4;
+
+}
+
 .menu {
     background-color: #c30f6c;
     box-shadow: 0px 0px 15px #000000;
