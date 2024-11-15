@@ -17,16 +17,18 @@ li{
     margin: 10px 60px 0 150px;
 }
 
-article .div{
-    margin: 50px 60px 0 60px;
-    padding: 15px 340px;
-    background-color: #db177ca2;
-    border-radius: 10px;
-}
+
 .SQL{
     margin: 20px 60px 0 60px;
 }
 
 img{
     margin: 10px 60px 0 145px;
+}
+div.boxRadius {
+    margin: 75px 75px 75px 75px;
+    border-radius: 15px; /* Bordures arrondies de 15px */
+    border: 2px solid #db177ca2; /* Optionnel : bordure visible */
+    background-color: #f9f9f9; /* Optionnel : couleur de fond douce */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optionnel : ombre pour un effet de relief */
 }
