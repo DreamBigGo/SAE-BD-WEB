@@ -108,8 +108,8 @@ h1 {
 /* -----------------------------------------------------------------------------------------------------------------------*/
 
 .presentation1 {
-    margin: 100px 60px 100px 60px;
-    padding: 30px 340px;
+    margin: 5% 10%;
+    padding: 5% 15%;
     background-color: rgb(182, 39, 63);
     text-align: center;
     border: 3px dashed rgb(255, 255, 255);
@@ -117,39 +117,36 @@ h1 {
 
 
 
-.fournisseur caption {
-    padding: 30px;
-    font-size: 20px;
+caption {
+    padding: 2%;
+    font-size: 1.2em;
     font-weight: bold;
 }
 
-.fournisseur table,.fournisseur th,.fournisseur td {
+table,th,td {
     border: 1px solid rgb(255, 255, 255);
     border-collapse: collapse;
-    width: 60%;
+    width: 90%;
+    max-width: 800px;
     text-align: center;
-    padding:20px;
-    margin: 0 18em;
+    padding:1em;
+    margin: 1em auto;
 }
 
-.fournisseur th {
+th {
     background-color: rgb(182, 39, 63);
 }
 
-.fournisseur th:hover {
+th:hover {
     background-color: rgb(45, 7, 23);
     color: white;
 }
 
-.fournisseur .impair {
+.impair {
     background-color: rgba(182, 39, 63, 0.634);
 }
 
-.fournisseur .impair tr:hover {
-    background-color: var(--orange-fonce);
-}
-
-.fournisseur .pair:hover {
+.pair:hover {
     background-color: rgba(255, 192, 203, 0.555);
 }
 
@@ -186,4 +183,19 @@ ul li {
 .client p {
     text-align: center;
     font-size: 20px;
+}
+
+
+
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+
+.avenir {
+    text-align: start;
+    margin: 60px;
+}
+
+.avenir ul li {
+    padding-bottom: 7px;
 }
