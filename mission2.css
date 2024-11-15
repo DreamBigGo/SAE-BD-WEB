@@ -1,0 +1,12 @@
+
+.SQL {
+    display: inline-flex;
+    flex-direction: column;
+    white-space: pre-wrap;
+    justify-content: left;
+    width:auto;
+    color:ghostwhite;
+    border: 0.2rem solid dimgrey;
+    background-color:dimgrey;
+    border-radius: 0.2rem;
+    font-size: medium;
