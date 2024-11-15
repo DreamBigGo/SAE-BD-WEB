@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Accueil Kdou</title>
+        <link rel="stylesheet" type="text/css" href="Style.css">
+        <link rel="stylesheet" type="text/css" href="asset/css/M2.css">
+        <link rel="icon" type="image/png" href="asset/img/imgstyle/logo.png" />
+    </head>
+    <body>
+        <nav>
+            <label for="bascule">☰</label>
+            <input type="checkbox" id="bascule">
+
+            <div class="menu">
+                <a class="box1" href="Accueil.html">Accueil</a>
+                <a href="mission1.html">Mission 1</a>
+                <a href="mission2.html">Mission 2</a>
+                <a href="mission3.html">Mission 3</a>
+                <a class="box5" href="conclusion.html">Conclusion</a>
+            </div>
+        </nav>
+
+        <section class="bannière">
+            <div class="image_bannière">
+                <img src="asset/img/imgstyle/magasin4.png" alt="Image de la bannière">
+            </div>
+            <h1>Kdou</h1>
+            <p>--- Projet : Eco-friendly ---</p>
+        </section>
+
+        <main>
+            <section>
+                <article class="presentation2">
+                    <h2> Contexte </h2>
+                    <p>
+                        Kdou est une entreprise qui a été <strong>créé en 2018</strong>. <br><br>
+                        Son but est de faire découvrir le monde aux restaurants et épiceries françaises. <br>
+                        Spécialisée dans l'importation et l'exportation de produits d'épicerie haut de gamme,
+                        elle relie le marché français aux meilleurs produits du monde entier.
+                        Leur sélection diversifiée comprend du tofu authentique du Japon, du sirop d'érable riche du Canada,
+                        de délicieux biscuits d'Angleterre, des pâtes fraîches d'Italie et bien plus encore.<br><br>
+                        Pour cette deuxième mission, nous avons utiliser le langage QBE pour l'exploitation de la base de donnée de Kdou
+                        et nous avons pu également nous initier avec le langage SQL pour établir des requêtes dans la problématique de l'entreprise.
+                    </p>
+                </article>
+
+                <article>
+                    <hr class="ligne">
+                    <h1>Bilan général de la mission 2</h1>
+                    <hr class="ligne">
+                </article>
+
+                <article class="indicateurs">
+                    <h2>Indicateurs pertinents</h2>
+                    <ul>
+                        <div class="box-requete">
+                            <p>On cherche les fournisseurs des produits d'Italie ou d'Allemagne vendus 50€ ou moins.<br>
+                                Pour cette requête, avoir les fournisseurs peut être intéressant pour penser à des collaboration proche
+                                de la France et ainsi consommer moins de CO<sub>2</sub>. De plus, il permet de rendre les produits plus abordable
+                                en choisissant les moins coûteux.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe1.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Produit.NomProd, Produit.PrixUnit, Fournisseur.Contact, Fournisseur.Ville, Fournisseur.Pays <br>
+                                    <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
+                                    <strong>WHERE</strong> (((Produit.PrixUnit)<50) <strong>AND</strong> ((Fournisseur.Pays)="Italie" <strong>OR</strong> (Fournisseur.Pays)="Allemagne")); </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/M2/resultat1.png">
+                        </div>
+
+                        <div class="box-requete">
+                            <p>On cherche les produits conditionnés dans du carton et dans du verre. On pourrait considérer que les bouteilles sont en verre et que les boîtes
+                                sont en plastique, mais par précaution, nous choisissons seulement où le conditionnement est bien explicite. En plus d'être recyclable, on pourrait
+                                utiliser ces données afin de mieux répartir dans les livraisons, les produits commandés qui seront dans le même conditionnement.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe2.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Produit.NomProd, Produit.QteParUnite <br>
+                                    <strong>FROM</strong> Produit
+                                    <strong>GROUP BY</strong> Produit.NomProd, Produit.QteParUnite <br>
+                                    <strong>HAVING</strong>(((Produit.QteParUnite) <strong>LIKE</strong> "*verre*" <strong>OR</strong> (Produit.QteParUnite) <strong>LIKE</strong> "*carton*"));
+                                </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/M2/resultat2.png">
+                        </div>
+
+                        <div class="box-requete"><p>On cherche le nombre de produits en bouteille proposés par chaque fournisseur. Dans le cas où elles sont recyclables, cela permet de mieux mesurer
+                            les quantitées en comparaison avec d'autres fournisseurs afin de maximiser les produits d'un seul fournisseur.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe3.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT</strong> Fournisseur.Societe, <strong>COUNT</strong>(Produit.QteParUnite) <strong>AS</strong> QteEnBouteille <br>
+                                    <strong>FROM</strong> Fournisseur <strong>INNER JOIN</strong> Produit <strong>ON</strong> Fournisseur.NoFour = Produit.NoFour <br>
+                                    <strong>WHERE</strong> (((Produit.QteParUnite) <strong>LIKE</strong> "*bouteille*"))
+                                    <strong>GROUP BY</strong> Fournisseur.Societe; </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/M2/resultat3.png">
+                        </div>
+                        <div class="box-requete"><p>On cherche les villes où la clientèle est la plus importante. Si Kdou cherche à se projeter pour une entreprise physique, cela permet de maximiser
+                            les profits et de diriger les produits en un seul endroit.</p>
+                            <h4>QBE et SQL généré</h4>
+                            <ul>
+                                <li><h5>En langage QBE : <img src="asset/img/M2/qbe4.png"></h5></li>
+                                <li><h5>En langage SQL : </h5>
+                                    <strong>SELECT TOP</strong> 3 Client.VilleCli, <strong>COUNT</strong>(Client.CodeCli) <strong>AS</strong> CompteDeCodeCli <br>
+                                    <strong>FROM</strong> Client <br>
+                                    <strong>GROUP BY</strong> Client.VilleCli <br>
+                                    <strong>ORDER BY COUNT</strong>(Client.CodeCli) <strong>DESC</strong>; </li>
+                            </ul>
+                            <h4>Resultat</h4>
+                            <img src="asset/img/M2/resultat4.png">
+                        </div>
+                    </ul>
+                </article>
+            </section>
+        </main>
+    </body>
+    <footer>
+      <p>&copy; Saé S1-04 CONCEPTION – INTERROGATION D’UNE BASE DE DONNEES</p>
+    </footer>
+</html>
