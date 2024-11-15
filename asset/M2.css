@@ -1,0 +1,102 @@
+
+.SQL {
+    display: inline-flex;
+    flex-direction: column;
+    white-space: pre-wrap;
+    justify-content: left;
+    width:auto;
+    color:ghostwhite;
+    border: 0.2rem solid dimgrey;
+    background-color:dimgrey;
+    border-radius: 0.2rem;
+    font-size: medium;}
+
+body {
+    margin: 0; /*Nous avons mis le margin et padding à 0 car le body met par défaut un espace indésirable pour nos images*/
+    padding: 0;
+    box-sizing: border-box; /* inclut le margin et le padding dans les calculs, les facilitant */
+
+    font-family: 'Montserrat', sans-serif;
+}
+
+.ligne {
+    border: none;
+    border-top: 2px solid rgb(182, 39, 63);
+    margin: 20px 0;
+    width: 100%;
+}
+
+
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    text-shadow: 1px 1px 2px rgb(45, 3, 22);
+    color: #32091c;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+
+.presentation2 {
+    margin: 100px 60px 100px 60px;
+    padding: 5%;
+    background-color: rgb(182, 39, 63);
+    text-align: center;
+    border: 3px dashed rgb(255, 255, 255);
+}
+
+.indicateurs h2 {
+    margin: 20px;
+    text-align: center;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+
+.box-requete {
+    border: 2px solid #c30f6c;
+    border-radius: 15px;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.box-requete h4 {
+    font-size: 1.5em;
+    color: #c30f6c;
+    margin-bottom: 10px;
+}
+
+.box-requete h5 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.box-requete > ul > li > strong {
+    color: #aa0f45;
+}
+
+.box-requete p {
+    font-size: 1em;
+    color: #333;
+    line-height: 1.6;
+}
+
+.box-requete img {
+    max-width: 100%;
+    height: auto;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/* -----------------------------------------------------------------------------------------------------------------------*/
+/*
