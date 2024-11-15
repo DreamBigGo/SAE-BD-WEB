@@ -1,9 +1,9 @@
-body {
-    margin: 0; /*Nous avons mis le margin et padding à 0 car le body met par défaut un espace indésirable pour nos images*/
-    padding: 0;
-    box-sizing: border-box; /* inclut le margin et le padding dans les calculs, les facilitant */
-
-    font-family: 'Montserrat', sans-serif;
+h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 2em;
+    text-shadow: 1px 1px 2px rgb(45, 3, 22);
+    color: #32091c;
 }
 
 .ligne {
@@ -11,96 +11,6 @@ body {
     border-top: 2px solid rgb(182, 39, 63);
     margin: 20px 0;
     width: 100%;
-}
-
-/* -----------------------------------------------------------------------------------------------------------------------*/
-/* ---------------------------------------              NAV + BANNIERE           -----------------------------------------*/
-/* -----------------------------------------------------------------------------------------------------------------------*/
-
-label, #bascule {
-    display: none; /* on veut pas afficher le trigramme */
-}
-
-.menu {
-    background-color: #c30f6c;
-    box-shadow: 0px 0px 15px #000000;
-
-    /*background: linear-gradient(
-        90deg,
-        #df1e58 30%,
-        #410b1b 80%
-
-    );*/
-
-    display: flex;
-    justify-content : space-around;
-    align-items: center;
-    transition: transform 0.3s ease;
-}/* on stylise les boutons avant l'effet de survole */
-
-.menu a {
-    color: white;
-
-    display: flex;
-    width: 20%;
-    height: 65px;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
-}
-
-.menu .box1 {
-    justify-content: start;
-    padding: 0 0 0 5%;
-}
-
-.menu .box5 {
-    justify-content: end;
-    padding: 0 5% 0 0;
-}
-
-.menu a:hover {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: #561131;
-}/* création d'une requête média */
-
-.image_bannière img {
-    filter: opacity(0.86) saturate(100%) brightness(0.68);
-    width: 100%;
-    height: 41.7em;
-
-}
-
-.bannière h1, .bannière p {
-    position: absolute;
-    margin: 0;
-    color: rgb(255, 255, 255);
-    text-shadow: 1px 1px 5px black;
-    font-weight: bold;
-}
-
-.bannière h1 {
-    font-size: 6em;
-    top: 35%;
-    left: 42%;
-}
-
-.bannière p {
-    font-size: 3em;
-    top: 49%;
-    left: 32%;
-}
-/* -----------------------------------------------------------------------------------------------------------------------*/
-/* -----------------------------------------------------------------------------------------------------------------------*/
-/* -----------------------------------------------------------------------------------------------------------------------*/
-
-h1 {
-    display: flex;
-    justify-content: center;
-    font-size: 2em;
-    text-shadow: 1px 1px 2px rgb(45, 3, 22);
-    color: #32091c;
 }
 
 /* -----------------------------------------------------------------------------------------------------------------------*/
@@ -166,6 +76,7 @@ th:hover {
 
 .client {
     background-color: rgb(182, 39, 63);
+    padding: 20px;
 }
 
 ul li {
@@ -173,11 +84,11 @@ ul li {
 }
 
 .client img {
-    width: 50em;
+    width: 90%;
+    max-width: 500px;
     height: auto;
-    margin: 20px;
-    margin: 10px 325px;
-    list-style-type: none;
+    margin: 20px auto;
+    display: block;
 }
 
 .client p {
